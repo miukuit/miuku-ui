@@ -1,0 +1,12 @@
+# 忽略不被NPM上传 用户只需要下载dist文件就可以
+# 忽略目录
+examples/
+packages/
+public/
+
+# 忽略指定文件
+.editorconfig
+vue.config.js
+babel.config.js
+jsconfig.json
+*.map
