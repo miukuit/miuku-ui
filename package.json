@@ -1,11 +1,12 @@
 {
   "name": "miuku-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "main": "dist/miuku-ui.umd.min.js",
   "author": {
     "name": "1275919414@qq.com <魏晨年>"
   },
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

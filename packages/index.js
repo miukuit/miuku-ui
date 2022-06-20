@@ -1,12 +1,15 @@
 // 整个包入口
 
-import miuButton from './miu-button'
+import miuButton from './miu-button' // 按钮
+import miuParticles from './miu-particles' // 粒子
 
 // 加载字体图标
 
 const components = [
-  miuButton
+  miuButton,
+  miuParticles
 ]
+
 // 定义install方法
 const install = (Vue) => {
   // 注册所有的组件
