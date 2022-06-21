@@ -1,5 +1,15 @@
 <template>
-  <miu-button></miu-button>
+  <miu-button>按钮</miu-button>
+  <miu-button type="success">按钮</miu-button>
+  <miu-button type="success" size="large">按钮</miu-button>
+  <miu-button type="success" size="large" round>按钮</miu-button>
+  <miu-button type="danger">按钮</miu-button>
+  <miu-button type="danger" size="large">按钮</miu-button>
+  <miu-button type="danger" size="large" round>按钮</miu-button>
+  <miu-button type="warning">按钮</miu-button>
+  <miu-button type="warning" size="large">按钮</miu-button>
+  <miu-button type="warning" size="large" round>按钮</miu-button>
+  <miu-button type="warning" bg-color="pink" text-color="#1bb556" round>按钮</miu-button>
   <div class="particles-box">
     <miu-particles></miu-particles>
   </div>
