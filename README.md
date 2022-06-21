@@ -21,9 +21,24 @@ $ yarn miuku-ui
 
 ```html
 <!-- 样式库 -->
-<link rel="stylesheet" href="//unpkg.com/miuku-ui/dist/index.css" />
+<link rel="stylesheet" href="//unpkg.com/miuku-ui/dist/miuku-ui.css" />
 <!-- 组件库 在此之前请引入 Vue3 -->
 <script src="//unpkg.com/miuku-ui"></script>
+```
+
+
+
+## 引入
+
+### 全局引入
+
+```js
+// main.js
+import miukuUI from 'miuku-ui'
+// 引入组件样式文件
+import 'miuku-ui/dist/miuku-ui.css'
+// 注册组件
+app.use(miukuUI)
 ```
 
 
