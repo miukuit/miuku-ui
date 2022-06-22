@@ -4,6 +4,7 @@ examples/
 packages/
 public/
 docs/
+release/
 
 # 忽略指定文件
 .temp

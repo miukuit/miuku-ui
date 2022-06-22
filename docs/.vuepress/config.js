@@ -3,6 +3,7 @@ module.exports = {
   lang: 'zh-CN',
   title: 'miuku-ui',
   description: 'miuku-ui',
+  dest: 'release',
   port: '10086',
   head: [['link', { rel: 'icon', href: '/images/logo.png' }]],
   markdown: {
