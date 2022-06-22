@@ -1,7 +1,6 @@
 const { defaultTheme } = require('@vuepress/theme-default')
 module.exports = {
   lang: 'zh-CN',
-  base: 'miuku-ui',
   title: 'miuku-ui',
   description: 'miuku-ui',
   port: '10086',
