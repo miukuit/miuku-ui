@@ -5,9 +5,9 @@ packages/
 public/
 docs/
 release/
+.temp/
 
 # 忽略指定文件
-.temp
 .editorconfig
 vue.config.js
 babel.config.js
