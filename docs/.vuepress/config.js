@@ -1,8 +1,4 @@
 const { defaultTheme } = require('@vuepress/theme-default')
-const { path } = require('@vuepress/utils')
-
-const navbar = require('./config/navbar')
-
 module.exports = {
   base: 'miuku-ui',
   port: '10086',
@@ -13,7 +9,7 @@ module.exports = {
   head: [
     ['link', {
       rel: 'icon',
-      href: '/images/logo.png'
+      href: '/img/logo.png'
     }]
   ],
   markdown: {
@@ -22,18 +18,19 @@ module.exports = {
     }
   },
   theme: defaultTheme({
-    logo: '/images/logo.png', // logo
+    logo: '/img/logo.png', // logo
     // repo 将被用作 仓库链接 的链接。仓库链接 将会显示为导航栏的最后一个元素。
     repo: 'https://github.com/miukuit/miuku-ui',
-    navbar,
-    sidebarDepth: 2, // 侧边栏显示2级
-  }),
-  plugins:[
-    [
-      '@vuepress/plugin-register-components',
+    navbar: [
       {
-        componentsDir: path.resolve(__dirname, './components')
+        text: '指南',
+        link: '/'
+      },
+      {
+        text: '组件',
+        link: '/guide/components'
       }
-    ]
-  ]
+    ],
+    sidebarDepth: 2, // 侧边栏显示2级
+  })
 }
