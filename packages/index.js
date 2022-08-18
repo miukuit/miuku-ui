@@ -1,12 +1,13 @@
 // 整个包入口
 import miuButton from './miu-button' // 按钮
 import miuParticles from './miu-particles' // 粒子
-
+import miuIdentify from './miu-identify' // 验证码
 // 加载字体图标
 
 const components = [
   miuButton,
-  miuParticles
+  miuParticles,
+  miuIdentify
 ]
 
 // 定义install方法
