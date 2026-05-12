@@ -5,9 +5,13 @@ export default defineConfig({
   exports: true,
   fromVite: true,
   clean: true,
-  format: ['esm', 'cjs', 'umd'],
+  // format: ['esm', 'cjs', 'umd'],
   dts: { vue: true },
-  outputOptions: {
-    name: 'MiukuUI',
-  },
+  // outputOptions: {
+  //   name: 'MiukuUI',
+  //   exports: 'named',
+  //   globals: {
+  //     vue: 'Vue',
+  //   },
+  // },
 })

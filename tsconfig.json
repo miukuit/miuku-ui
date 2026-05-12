@@ -6,8 +6,8 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "paths": {
-      "@miuku-ui": ["./packages"],
-      "@miuku-ui/*": ["./packages/*"]
+      "@miuku-ui": ["./src"],
+      "@miuku-ui/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "types": ["node"],

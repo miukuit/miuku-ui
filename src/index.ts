@@ -8,6 +8,6 @@ export * from './types'
 
 const installer = createInstaller(componentList)
 
-export const install = installer.install
-export const version = installer.version
-export default installer
+const install = installer.install
+const version = installer.version
+export { install, version }
