@@ -1,0 +1,83 @@
+{
+  "name": "miuku-ui",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A Vue component library.",
+  "author": {
+    "name": "VisionView",
+    "email": "1275919414@qq.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/miukuit/miuku-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miukuit/miuku-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/miukuit/miuku-ui/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=24.12.0",
+    "pnpm": ">=11.1.0"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "play": "vite",
+    "test": "vitest",
+    "typecheck": "vue-tsc --noEmit",
+    "release": "bumpp",
+    "prepublishOnly": "pnpm run build",
+    "lint": "eslint --cache",
+    "lint:fix": "eslint --cache --fix"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.34"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^9.0.0",
+    "@tsdown/css": "^0.22.0",
+    "@types/node": "^25.6.2",
+    "@unocss/eslint-plugin": "^66.6.8",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitest/browser-playwright": "^4.1.5",
+    "bumpp": "^11.1.0",
+    "eslint": "^10.3.0",
+    "eslint-plugin-format": "^2.0.1",
+    "lint-staged": "^17.0.4",
+    "playwright": "^1.59.1",
+    "simple-git-hooks": "^2.13.1",
+    "tsdown": "^0.22.0",
+    "typescript": "^6.0.3",
+    "unocss": "^66.6.8",
+    "vite": "^8.0.11",
+    "vitest": "^4.1.5",
+    "vitest-browser-vue": "^2.1.0",
+    "vue": "^3.5.34",
+    "vue-tsc": "^3.2.8"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,vue,md,json}": [
+      "pnpm lint:fix"
+    ]
+  }
+}
