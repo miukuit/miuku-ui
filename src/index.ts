@@ -5,6 +5,7 @@ export * from './components'
 export * from './hooks'
 export * from './resolver'
 export * from './types'
+export * as colorTransformer from './utils/color'
 
 const installer = createInstaller(componentList)
 

@@ -1,6 +1,6 @@
-# vue-components-starter
+# miuku-ui
 
-A starter for creating a Vue component library.
+A Vue component library.
 
 ## Development
 
@@ -13,7 +13,7 @@ npm install
 - Run the playground:
 
 ```bash
-npm run playground
+npm run play
 ```
 
 - Run the unit tests:

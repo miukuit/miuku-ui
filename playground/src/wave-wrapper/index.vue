@@ -4,6 +4,6 @@ import { MWaveWrapper } from '@miuku-ui'
 
 <template>
   <div class="h-full w-full">
-    <MWaveWrapper :percent="84" fill="#4c4fff" />
+    <MWaveWrapper :percent="10" fill="#4c4fff" />
   </div>
 </template>
