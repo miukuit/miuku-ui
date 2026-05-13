@@ -11,6 +11,9 @@ export default defineConfig({
     UnoCSS(),
     dts({
       bundleTypes: true,
+      insertTypesEntry: true,
+      tsconfigPath: 'tsconfig.app.json',
+      exclude: ['playground'],
     }),
   ],
   resolve: {

@@ -1,6 +1,7 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
+    "incremental": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "paths": {
       "@miuku-ui": ["./src"],
@@ -8,10 +9,11 @@
     },
     "types": ["vite/client"],
     "noFallthroughCasesInSwitch": true,
-    /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true
   },
   "include": [
     "src/**/*.ts",
