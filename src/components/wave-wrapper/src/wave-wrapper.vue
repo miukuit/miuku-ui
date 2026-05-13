@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-
+defineOptions({
+  name: 'MWaveWrapper',
+})
 </script>
 
 <template>
-  <div class="h-full w-full">
-    asdasd
+  <div>
+    wave-wrapper
   </div>
 </template>
