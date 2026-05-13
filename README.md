@@ -1,29 +1,13 @@
-# vue-components-starter
-
-A starter for creating a Vue component library.
-
-## Development
-
-- Install dependencies:
+# miuku-ui
 
 ```bash
-npm install
+pnpm install
 ```
-
-- Run the playground:
-
-```bash
-npm run playground
-```
-
-- Run the unit tests:
-
-```bash
-npm run test
-```
-
-- Build the library:
 
 ```bash
 npm run build
 ```
+
+## TODO
+
+- 将count-to中的数字格式化方法提取出来，放到utils/tools/format.ts中

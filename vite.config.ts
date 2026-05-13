@@ -1,28 +1,37 @@
-/// <reference types="vitest/config" />
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
-import { playwright } from '@vitest/browser-playwright'
+import UnoCSS from 'unocss/vite'
+import dts from 'unplugin-dts/vite'
 import { defineConfig } from 'vite'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
+// https://vite.dev/config/
 export default defineConfig({
-  root: './playground',
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    UnoCSS(),
+    dts({
+      bundleTypes: true,
+    }),
+  ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './playground'),
-      '@miuku-ui': path.resolve(__dirname, './src'),
+      '@miuku-ui': resolve(__dirname, 'src'),
     },
   },
-  test: {
-    root: '.',
-    browser: {
-      enabled: true,
-      provider: playwright(),
-      instances: [{ browser: 'chromium' }],
-      headless: true,
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'MiukuUI',
+      formats: ['es', 'cjs', 'umd'],
+      fileName: 'index',
+    },
+    rolldownOptions: {
+      external: ['vue'],
+      output: {
+        globals: {
+          vue: 'Vue',
+        },
+      },
     },
   },
 })
