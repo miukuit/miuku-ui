@@ -10,6 +10,6 @@ export * from './utils/tools'
 
 const installer = createInstaller(componentList)
 
-const install = installer.install
-const version = installer.version
-export { install, version }
+export const install = installer.install
+export const version = installer.version
+export default installer

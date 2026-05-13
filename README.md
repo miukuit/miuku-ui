@@ -1,13 +1,29 @@
 # miuku-ui
 
-```bash
-pnpm install
+## 使用指南
+
+### 按需引入
+
+```
+<script setup lang="ts">
+import { MCountTo } from 'miuku-ui'
+</script>
+
+<template>
+  <MCountTo :end-val="88.23533" :precision="2" :duration="2000" mutant />
+</template>
 ```
 
-```bash
-npm run build
+### 全量引入
+
+```ts
+import MiukuUI from 'miuku-ui'
+import { createApp } from 'vue'
+import App from './App.vue'
+import 'miuku-ui/style' // 引入全局样式
+
+const app = createApp(App)
+
+app.use(MiukuUI)
+app.mount('#app')
 ```
-
-## TODO
-
-- 将count-to中的数字格式化方法提取出来，放到utils/tools/format.ts中

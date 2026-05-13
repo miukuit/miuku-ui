@@ -1,7 +1,7 @@
 {
   "name": "miuku-ui",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "A Vue component library.",
   "author": {
     "name": "VisionView",
@@ -16,13 +16,22 @@
   "bugs": {
     "url": "https://github.com/miukuit/miuku-ui/issues"
   },
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./style": "./dist/index.css",
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.cjs",
+  "unpkg": "./dist/index.umd.cjss",
+  "jsdelivr": "./dist/index.umd.cjss",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -47,6 +56,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^9.0.0",
+    "@microsoft/api-extractor": "^7.58.7",
     "@types/node": "^24.12.3",
     "@unocss/eslint-plugin": "^66.6.8",
     "@vitejs/plugin-vue": "^6.0.6",

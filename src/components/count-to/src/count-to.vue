@@ -4,6 +4,10 @@ import Decimal from 'decimal.js'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { cancelAnimationFrame, requestAnimationFrame } from './animation-frame'
 
+defineOptions({
+  name: 'MCountTo',
+})
+
 const props = withDefaults(defineProps<CountToProps>(), {
   startVal: 0,
   endVal: 0,
