@@ -1,6 +1,7 @@
 import type { Plugin } from 'vue'
 
 import {
+  MContextMenu,
   MCountTo,
   MSmartTable,
   MTimeLineSlider,
@@ -8,6 +9,7 @@ import {
 } from './components'
 
 export const componentList = [
+  MContextMenu,
   MCountTo,
   MSmartTable,
   MTimeLineSlider,
