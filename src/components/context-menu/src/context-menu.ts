@@ -1,4 +1,4 @@
-import type { Component } from 'vue'
+import type { Component, VNode } from 'vue'
 
 export interface ContextMenuItem {
   /** 菜单项名称 */
@@ -6,7 +6,7 @@ export interface ContextMenuItem {
   /** 菜单项唯一标识 */
   key?: string | number
   /** 图标，支持字符串或Vue组件 */
-  icon?: string | Component
+  icon?: string | VNode | Component
   /** 是否禁用菜单项 */
   disabled?: boolean
   /** 是否在上方显示分割线 */
