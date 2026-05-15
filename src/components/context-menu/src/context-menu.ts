@@ -50,6 +50,11 @@ export interface ContextMenuProps {
   submenuCloseDelay?: number
 }
 
+export interface ContextMenuItemProps {
+  item: ContextMenuItem
+  depth?: number
+}
+
 // 事件
 export interface ContextMenuEmits {
   (e: 'update:visible', value: boolean): void

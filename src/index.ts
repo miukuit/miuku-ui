@@ -1,6 +1,5 @@
 import { createInstaller } from '@miuku-ui/utils'
 import { componentList } from './component-list'
-import 'virtual:uno.css'
 import './styles/index.css'
 
 export * from './components'

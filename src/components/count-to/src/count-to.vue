@@ -179,11 +179,19 @@ defineExpose({
 </script>
 
 <template>
-  <template v-if="mutant">
-    <span>{{ displayValue[0] }}</span>
-    <span v-if="displayValue[1]" class="text-[0.75em]">.{{ displayValue[1] }}</span>
-  </template>
-  <template v-else>
-    {{ displayValue }}
-  </template>
+  <span class="m-count-to">
+    <template v-if="mutant">
+      <span>{{ displayValue[0] }}</span>
+      <span v-if="displayValue[1]" class="m-count-to__mutant">.{{ displayValue[1] }}</span>
+    </template>
+    <template v-else>{{ displayValue }}</template>
+  </span>
 </template>
+
+<style lang="scss" scoped>
+.m-count-to {
+  &__mutant {
+    font-size: 0.75em;
+  }
+}
+</style>

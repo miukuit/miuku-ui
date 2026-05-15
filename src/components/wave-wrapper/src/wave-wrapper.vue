@@ -156,5 +156,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="containerRef" class="h-full w-full" />
+  <div ref="containerRef" class="m-wave-wrapper" />
 </template>
+
+<style lang="scss" scoped>
+.m-wave-wrapper {
+  height: 100%;
+  width: 100%;
+}
+</style>

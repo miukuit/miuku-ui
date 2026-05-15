@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { ContextMenuItem, ContextMenuPosition } from '@miuku-ui'
-
+import { MContextMenu } from '@miuku-ui'
 import { h, ref } from 'vue'
 
 const menuPosition = ref<ContextMenuPosition>({
@@ -71,7 +71,7 @@ function showContextMenu(e: MouseEvent) {
 
 <template>
   <div
-    class="h-100"
+    class="context-menu-test"
     @contextmenu="showContextMenu"
   >
     {{ selectMenu }}
@@ -83,3 +83,10 @@ function showContextMenu(e: MouseEvent) {
     @select="contextMenuSelectEvent"
   />
 </template>
+
+<style scoped>
+.context-menu-test {
+  height: 300px;
+  width: 100%;
+}
+</style>
