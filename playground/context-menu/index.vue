@@ -15,15 +15,19 @@ const menuList: ContextMenuItem[] = [
   {
     label: '复制',
     key: 'copy',
+    shortcut: 'Ctrl+C',
     icon: h('i', { class: 'icon-copy' }),
   },
   {
     label: '粘贴',
     key: 'paste',
+    disabled: true,
+    shortcut: 'Ctrl+V',
     icon: h('i', { class: 'icon-paste' }),
   },
   {
     label: '插入字段',
+    divided: true,
     children: [
       {
         label: '插入文本',
@@ -37,6 +41,7 @@ const menuList: ContextMenuItem[] = [
   },
   {
     label: '权限设置',
+    divided: true,
     children: [
       {
         label: '全员权限',

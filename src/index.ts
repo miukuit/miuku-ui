@@ -1,6 +1,7 @@
 import { createInstaller } from '@miuku-ui/utils'
 import { componentList } from './component-list'
 import './styles/index.css'
+import './styles/icon.css'
 
 export * from './components'
 export * from './hooks'

@@ -1,30 +1,42 @@
 <script lang="ts" setup>
-import type { ContextMenuEmits, ContextMenuItem, ContextMenuProps } from './context-menu'
+import type { ContextMenuEmits, ContextMenuItem, ContextMenuProps, OpenDirection } from './context-menu'
 import { computed, nextTick, onBeforeUnmount, onMounted, provide, ref, useTemplateRef, watch } from 'vue'
-import contextMenuItem from './context-menu-item.vue'
+import contextSubmenu from './context-submenu.vue'
 
 defineOptions({
   name: 'MContextMenu',
 })
-
 const props = withDefaults(defineProps<ContextMenuProps>(), {
+  size: 'md',
   zIndex: 2000,
-  minWidth: 150,
-  maxWidth: 300,
-  submenuOpenDelay: 200,
-  submenuCloseDelay: 300,
+  minWidth: 200,
+  maxWidth: 400,
 })
 const emits = defineEmits<ContextMenuEmits>()
 
-const menuRef = useTemplateRef('contextMenuRef')
+const contextMenuRef = useTemplateRef('contextMenu')
+
 const adjustedPosition = ref({ x: 0, y: 0 })
+const openDirection = ref<OpenDirection>('right')
+
+const menuMinWidth = computed(() => typeof props.minWidth === 'number' ? `${props.minWidth}px` : props.minWidth)
+const menuMaxWidth = computed(() => typeof props.maxWidth === 'number' ? `${props.maxWidth}px` : props.maxWidth)
+const contextMenuStyle = computed(() => ({
+  left: `${adjustedPosition.value.x}px`,
+  top: `${adjustedPosition.value.y}px`,
+  zIndex: props.zIndex,
+  minWidth: menuMinWidth.value,
+  maxWidth: menuMaxWidth.value,
+  borderRadius: `var(--m-radius-${props.size})`,
+  boxShadow: `var(--m-shadow-${props.size})`,
+}))
 
 // 为所有嵌套菜单项子项提供共享配置
-provide('submenuOpenDelay', computed(() => props.submenuOpenDelay))
-provide('submenuCloseDelay', computed(() => props.submenuCloseDelay))
-provide('menuMinWidth', computed(() => props.minWidth))
-provide('menuMaxWidth', computed(() => props.maxWidth))
-provide('rootZIndex', computed(() => props.zIndex))
+provide('menuMinWidth', menuMinWidth.value)
+provide('menuMaxWidth', menuMaxWidth.value)
+provide('rootZIndex', props.zIndex)
+provide('openDirection', openDirection.value)
+provide('size', props.size)
 
 function close() {
   emits('update:visible', false)
@@ -33,32 +45,47 @@ function handleSelect(item: ContextMenuItem) {
   emits('select', item)
   close()
 }
-
-// 计算位置
-async function calcPosition() {
+// 计算菜单位置
+async function calculatePosition() {
   await nextTick()
-  if (!menuRef.value) {
+  if (!contextMenuRef.value) {
     return
   }
   const { innerWidth: vw, innerHeight: vh } = window
-  const { offsetWidth: mw, offsetHeight: mh } = menuRef.value
-  const offsetX = props.offset?.x ?? 0
-  const offsetY = props.offset?.y ?? 0
+  const { offsetWidth: mw, offsetHeight: mh } = contextMenuRef.value
+  let x = props.position.x
+  let y = props.position.y
 
-  let x = props.position.x + offsetX
-  let y = props.position.y + offsetY
-  // Prevent overflow right
   if (x + mw > vw) {
-    x = vw - mw
+    x = props.position.x - mw
+    openDirection.value = 'left'
   }
-  // Prevent overflow bottom
+  else {
+    openDirection.value = 'right'
+  }
+  // 左边界兜底，防止向左展开时超出视口
+  if (x < 0) {
+    x = 0
+  }
+  // ── 垂直方向：底部不足则向上偏移，不低于视口顶部 ──
   if (y + mh > vh) {
     y = vh - mh
   }
-
+  if (y < 0) {
+    y = 0
+  }
   adjustedPosition.value = { x, y }
 }
-
+// 任何菜单外的点击事件触发关闭菜单
+function handleGlobalClick(e: MouseEvent) {
+  if (!props.visible) {
+    return
+  }
+  if (contextMenuRef.value && contextMenuRef.value.contains(e.target as Node)) {
+    return
+  }
+  close()
+}
 // ESC 键触发关闭菜单
 function handleKeydown(e: KeyboardEvent) {
   if (!props.visible) {
@@ -68,44 +95,15 @@ function handleKeydown(e: KeyboardEvent) {
     close()
   }
 }
-// 任何菜单外的点击事件触发关闭菜单
-function handleGlobalClick(e: MouseEvent) {
-  if (!props.visible) {
-    return
-  }
-  if (menuRef.value && menuRef.value.contains(e.target as Node)) {
-    return
-  }
-  close()
-}
-// 任何菜单外的右键事件触发关闭菜单
-function handleContextMenu(e: MouseEvent) {
-  if (!props.visible) {
-    return
-  }
-  if (menuRef.value && menuRef.value.contains(e.target as Node)) {
-    return
-  }
-  close()
-}
 
 watch(
   () => props.visible,
   (val) => {
     if (val) {
-      calcPosition()
-      emits('open', props.position)
+      calculatePosition()
     }
     else {
       emits('close')
-    }
-  },
-)
-watch(
-  () => props.position,
-  () => {
-    if (props.visible) {
-      calcPosition()
     }
   },
 )
@@ -113,7 +111,6 @@ watch(
 onMounted(() => {
   document.addEventListener('mousedown', handleGlobalClick, true)
   document.addEventListener('keydown', handleKeydown)
-  document.addEventListener('contextmenu', handleContextMenu, true)
   window.addEventListener('resize', close)
   window.addEventListener('scroll', close, true)
 })
@@ -121,7 +118,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener('mousedown', handleGlobalClick, true)
   document.removeEventListener('keydown', handleKeydown)
-  document.removeEventListener('contextmenu', handleContextMenu, true)
   window.removeEventListener('resize', close)
   window.removeEventListener('scroll', close, true)
 })
@@ -129,35 +125,28 @@ onBeforeUnmount(() => {
 
 <template>
   <Teleport to="body">
-    <Transition>
-      <div
-        v-if="visible"
-        ref="contextMenuRef"
-        class="m-context-menu"
-        :style="{
-          left: `${adjustedPosition.x}px`,
-          top: `${adjustedPosition.y}px`,
-          minWidth: `${minWidth}px`,
-          maxWidth: `${maxWidth}px`,
-          zIndex,
-        }"
-        role="menu"
-        aria-label="Context menu"
-      >
-        <contextMenuItem
-          v-for="item in menus"
-          :key="item.key ?? item.label"
-          :item="item"
-          :depth="0"
-          @select="handleSelect"
-        />
-      </div>
-    </Transition>
+    <div
+      v-if="visible"
+      ref="contextMenu"
+      class="m-context-menu"
+      :style="contextMenuStyle"
+    >
+      <context-submenu
+        v-for="item in menus"
+        :key="item.key ?? item.label"
+        :item="item"
+        :depth="0"
+        @select="handleSelect"
+      />
+    </div>
   </Teleport>
 </template>
 
 <style lang="scss" scoped>
 .m-context-menu {
-  // TODO 编写样式
+  position: fixed;
+  padding: var(--m-space-sm) 0;
+  background-color: var(--m-color-bg);
+  border: 1px solid var(--m-color-border);
 }
 </style>

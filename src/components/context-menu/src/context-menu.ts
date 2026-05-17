@@ -1,4 +1,15 @@
+import type { BasicSizeType } from '@miuku-ui/types'
 import type { Component, VNode } from 'vue'
+
+/** 位置坐标 */
+export interface ContextMenuPosition {
+  /** 水平偏移量(px) */
+  x: number
+  /** 垂直偏移量(px) */
+  y: number
+}
+
+export type OpenDirection = 'left' | 'right'
 
 export interface ContextMenuItem {
   /** 菜单项名称 */
@@ -21,14 +32,6 @@ export interface ContextMenuItem {
   onClick?: (item: ContextMenuItem) => void | Promise<void>
 }
 
-/** 位置坐标 */
-export interface ContextMenuPosition {
-  /** 水平偏移量(px) */
-  x: number
-  /** 垂直偏移量(px) */
-  y: number
-}
-
 export interface ContextMenuProps {
   /** 菜单项配置数组 */
   menus: ContextMenuItem[]
@@ -36,29 +39,28 @@ export interface ContextMenuProps {
   visible: boolean
   /** 菜单弹出位置 */
   position: ContextMenuPosition
-  /** z-index层级 */
+  /** 大小 */
+  size?: BasicSizeType
+  /**
+   * z-index层级
+   * @default 2000
+   */
   zIndex?: number
-  /** 菜单最小宽度(px) */
+  /**
+   * 菜单最小宽度(px)
+   * @default 200
+   */
   minWidth?: number
-  /** 菜单最大宽度(px) */
+  /**
+   * 菜单最大宽度(px)
+   * @default 400
+   */
   maxWidth?: number
-  /** 菜单弹出偏移量(px) */
-  offset?: Partial<ContextMenuPosition>
-  /** 子菜单展开延迟(ms) */
-  submenuOpenDelay?: number
-  /** 子菜单关闭延迟(ms) */
-  submenuCloseDelay?: number
-}
-
-export interface ContextMenuItemProps {
-  item: ContextMenuItem
-  depth?: number
 }
 
 // 事件
 export interface ContextMenuEmits {
   (e: 'update:visible', value: boolean): void
   (e: 'select', item: ContextMenuItem): void
-  (e: 'open', position: ContextMenuPosition): void
   (e: 'close'): void
 }
